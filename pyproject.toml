@@ -1,8 +1,8 @@
 [project]
 name = "pages2docx"
-version = "0.0.1"
+version = "0.0.7"
 authors = [
-  { name="Problemli GmbH", email="info@problem.li" },
+    { name = "Problemli GmbH", email = "info@problem.li" },
 ]
 description = "Converts .pages to .docx"
 readme = "README.md"
@@ -14,8 +14,8 @@ classifiers = [
 ]
 # Define project dependencies here
 dependencies = [
-  "requests>=2.31.0",
-  "click>=8.1.7"
+    "click>=8.1.7",
+    "cloudconvert>=2.1.0",
 ]
 [project.urls]
 Homepage = "https://github.com/blemli/pages2docx"

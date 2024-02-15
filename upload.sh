@@ -28,12 +28,6 @@ python3 -m pip install --upgrade build
 rm -rf dist/*
 python3 -m build
 confirmation=$(read -p "Do you want to upload the new version to PyPI? (y/n) " -n 1 -r)
-if [[ $confirmation =~ ^[Yy]$ ]]; then
-  echo "Uploading to PyPI"
-  python3 -m twine upload --repository pypi dist/* --user __token__ --password $api_token
-  pip install --upgrade $(basename $(pwd))
-else
-  echo "Aborting"
-  exit 1
-fi
-
+echo "Uploading to PyPI"
+python3 -m twine upload --repository pypi dist/* --user __token__ --password $api_token
+pip install --upgrade $(basename $(pwd))

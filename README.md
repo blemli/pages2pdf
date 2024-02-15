@@ -1,9 +1,17 @@
-# pages2docx
+# pages2pdf
 
-Convert all .pages files in the directory and its subdirectories to .docx:
+Add your Cloudconvert API Key to .env:
 
 ```shell
-python3 -m pages2docx .
+CLOUDCONVERT_API_KEY="ERTGIZTDIFGKDRztgITZdfGkzuf5i66tzfkVt6RFitzkujhgo67rtzfghT6rfiutzk"
+```
+
+
+
+Convert all .pages files in the directory and its subdirectories to .pdf:
+
+```shell
+python3 -m pages2pdf .
 ```
 
 
@@ -11,6 +19,6 @@ python3 -m pages2docx .
 Get help
 
 ```shell
-python3 -m pages2docx --help
+python3 -m pages2pdf --help
 ```
 

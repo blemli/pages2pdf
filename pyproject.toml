@@ -1,6 +1,6 @@
 [project]
 name = "pages2pdf"
-version = "0.0.13"
+version = "0.0.15"
 authors = [
     { name = "Problemli GmbH", email = "info@problem.li" },
 ]
@@ -16,6 +16,7 @@ classifiers = [
 dependencies = [
     "click>=8.1.7",
     "cloudconvert>=2.1.0",
+    "python-dotenv>=1.0.1"
 ]
 [project.urls]
 Homepage = "https://github.com/blemli/pages2pdf"

@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 globally_confirmed = False
+globally_confirmed_overwrite = False
 
 # Configure the CloudConvert API
 cloudconvert.configure(api_key=os.environ['CLOUDCONVERT_API_KEY'])
@@ -55,7 +56,7 @@ def threaded_convert(filename):
     conversion_thread.start()
     return conversion_thread
 
-def convert_all(path, silent=False):
+def convert_all(path, silent=False, no_overwrite=False):
     global globally_confirmed
     if path is None or not os.path.exists(path):
         print('Invalid path:', path)
@@ -72,9 +73,11 @@ def convert_all(path, silent=False):
                     continue
             base, _ = os.path.splitext(filename)
             if os.path.exists(base + '.pdf'):
-                confirm = input(f'DANGER: File {base + ".pdf"} already exists. Overwrite? (y/n): ')
-                if confirm.lower() != 'y':
-                    continue
+                if no_overwrite: continue
+                else:
+                    confirm = input(f'DANGER: File {base + ".pdf"} already exists. Overwrite? (y/n/a): ')
+                    if confirm.lower() != 'y':
+                        continue
         thread = threaded_convert(filename)
         threads.append(thread)
         count += 1
@@ -87,9 +90,10 @@ def convert_all(path, silent=False):
 @click.command()
 @click.argument('path')
 @click.option('--silent', is_flag=True, default=False, help="don't ask for confirmation (DANGER!)")
-def cli(path, silent):
+@click.option('--no-overwrite', is_flag=True, default=False, help="don't overwrite existing .pdf files")
+def cli(path, silent, no_overwrite):
     """Converts all .pdf files in the directory to .pdf format using CloudConvert."""
-    convert_all(path=path, silent=silent)
+    convert_all(path=path, silent=silent, no_overwrite=no_overwrite)
 
 if __name__ == '__main__':
     cli()
